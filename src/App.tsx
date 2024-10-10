@@ -1,17 +1,30 @@
 import './App.css';
-import {compressJSON, decompressJSON} from './utils/JSONCompress';
+import NavBar from './component/NavBar';
+import './global.css'; 
+import CardContainer from './component/CardContainer'; 
+import { useState } from 'react';
+import { DropResult } from 'react-beautiful-dnd';
 
 function App() {
-  const test = { my: 'super', puper: [456, 567 ,134 ,132, 12123 ,12412 ,214], awesome: 'pako' };
-  const comp = compressJSON(test)
-  const result = decompressJSON(comp)
+  const [cards, setCards] = useState([
+    { id: '1', text: 'Card 1', title: 'Title 1', description: 'Description 1' },
+    { id: '2', text: 'Card 2', title: 'Title 2', description: 'Description 2' },
+    // 更多卡片
+]);
 
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
 
+    const newCards = Array.from(cards);
+    const [removed] = newCards.splice(result.source.index, 1);
+    newCards.splice(result.destination.index, 0, removed);
+
+    setCards(newCards);
+};
   return (
-    <div className='view-container'>
-      <p>compressed: {comp}</p>
-      <p>result: {result}</p>
-
+    <div className='app-container'>
+      <NavBar/>
+      <CardContainer id="droppable-1" cards={cards} onDragEnd={onDragEnd} />
     </div>
   );
 }

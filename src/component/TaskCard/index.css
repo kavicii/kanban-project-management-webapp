@@ -1,0 +1,5 @@
+.task-card{
+    background-color: var(--cyberpunk-primary-color);
+    border-radius: 4px;
+    padding: var(--main-padding);
+}

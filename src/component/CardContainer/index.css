@@ -1,0 +1,8 @@
+.card-container{ 
+  display: flex;
+  flex-direction: column;
+  padding: var(--main-padding);
+  background-color: var(--cyberpunk-secondary-color);
+  border-radius: 14px;
+  gap: 10px;
+}
